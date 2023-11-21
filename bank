@@ -1,0 +1,94 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <fstream>
+#include <ctime>
+#include <time.h>
+#include <stdio.h>
+
+using namespace std;
+
+int main(int argc, char* argv[]) {
+    int buff;
+    int pressedkey, MoneyInBalance, TakeFromBallance, PutOnMobile, Password;
+    int i;
+    {
+        int main(void); {
+            time_t result = time(NULL);
+            printf("%s", ctime(&result));
+        }
+        ofstream fout("balance.txt");
+        fout << "user_balance = 0";
+        fout.close();
+    }
+
+    for (i = 0; i <= 3;) {
+        cout << "Enter Your Password" << endl;
+        cin >> Password;
+        if (Password == 1234)
+            while (int i = 1) {
+                cout << "for check your balance press 1" << endl;
+                cout << "for deposit money press 2" << endl;
+                cout << "for take off money press 3" << endl;
+                cout << "for put money on phone press 4" << endl;
+                cout << "for exit press 5" << endl;
+                cin >> pressedkey;
+
+                if (pressedkey == 1) {
+                    ifstream fin("balance.txt");
+                    fin >> buff;
+                    cout << ("your balance = ") << buff << endl;
+                    fin.close();
+                }
+                else if (pressedkey == 2) {
+                    ifstream fin("balance.txt");
+                    fin >> buff;
+                    cout << ("enter money") << endl;
+                    cin >> MoneyInBalance;
+                    cout << "operation finished" << endl;
+                    cout << ("your balance = ") << buff + MoneyInBalance << endl;
+                    ofstream fout("balance.txt");
+                    fout << (buff + MoneyInBalance);
+                    fout.close();
+                }
+                else if (pressedkey == 3) {
+                    ifstream fin("balance.txt");
+                    fin >> buff;
+                    cout << ("take off money") << endl;
+                    cin >> TakeFromBallance;
+                    if (TakeFromBallance > buff) {
+                        cout << ("you not have money nigga") << endl;
+                    }
+                    else {
+                        cout << ("your balance = ") << buff - TakeFromBallance << endl;
+                        ofstream fout("balance.txt");
+                        fout << (buff - TakeFromBallance);
+                        fout.close();
+                    }
+                }
+                else if (pressedkey == 4) {
+                    ifstream fin("balance.txt");
+                    fin >> buff;
+                    cout << ("how many money do you want to put on the phone") << endl;
+                    cin >> PutOnMobile;
+                    if (PutOnMobile > buff) {
+                        cout << ("you not have money nigga") << endl;
+                    }
+                    else {
+                        cout << buff - PutOnMobile << endl;
+                        ofstream fout("balance.txt");
+                        fout << (buff - PutOnMobile);
+                        fout.close();
+                    }
+                }
+                else if (pressedkey == 5) {
+                    break;
+                }
+                else if (pressedkey <= 6, pressedkey >= 0) {
+                    cout << "invalid enter" << endl;
+                }
+            }
+        else if (Password <= 1233, Password >= 1235)
+            cout << "incorect password" << i + 1 << endl;
+    }
+    return 0;
+}
