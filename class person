@@ -1,0 +1,61 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <iomanip>
+#include <fstream>
+
+using namespace std;
+
+class Person {
+public:
+    string name;
+    string second_name;
+    string job;
+    int age;
+    int id;
+    int parent_id;
+    vector<Person> children;
+
+    Person(int _age, string _name, string _second_name, string _job, int _id, int _parent_id) :
+        age(_age), name(_name), second_name(_second_name), id(_id), parent_id(_parent_id), job(_job) {}
+
+    void changejob(string new_job) {
+        string old_job = this->job;
+        this->job = new_job;
+        ofstream job_logs;
+        job_logs.open("job_logs.txt");
+        job_logs << "Person " << this->name << "" << this->second_name << "changed job with " << old_job << "to " <<  this->job << endl;
+        job_logs.close();
+    }
+};
+
+
+void printTable(vector<Person>& people) {
+    cout << left << setw(15) << "Name" << setw(20) << "Second Name" << setw(5) << "Age" << setw(5) << "ID"
+        << setw(10) << "Parent ID" << setw(20) << "Children IDs" << "job" << endl;
+        
+         for (auto& person : people) {
+        string children_ids = "";
+        for (auto& child : person.children) {
+            children_ids += to_string(child.id) + " ";
+        }
+        
+        cout << left << setw(15) << person.name << setw(20) << person.second_name << setw(5) << person.age
+            << setw(5) << person.id << setw(10) << person.parent_id << setw(20) << children_ids << person.job << endl;
+    }
+}
+
+int main() {
+    Person person1(32, "Clown", "First", "rab", 1, 0);
+    person1.changejob("rabnodrugoy");
+    Person person2(28, "Big", "Smoke", "rab", 2, 0);
+    Person person3(12, "Small", "Flash", "not work", 3, 1);
+    Person person4(14, "Child", "Clown", "not work", 4, 1);
+    person1.children = { person3, person4 };
+
+    vector<Person> people = { person1, person2, person3, person4 };
+    
+    printTable(people);
+
+    return 0;
+}
