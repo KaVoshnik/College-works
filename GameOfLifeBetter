@@ -1,0 +1,53 @@
+#include <iostream>
+#include <string>
+
+#define w 9
+#define h 9
+
+
+int main() {
+
+    int map[w][h];
+
+    void init_world(point map[][h])
+    {   
+        unsigned int i, j;
+
+        ifstream save2("save2.txt", ios::in);
+
+        if (save2.is_open())
+        {
+            cout << "You selected this save:" << endl;
+
+            for (i = 0; i < __WORLD_WIDTH__; i++) {
+                for (j = 0; j < __WORLD_HEIGHT__; j++) {
+                    save2 >> map[i][j].is_live;
+                }
+            }
+
+            cout << endl;
+            cout << endl;
+        }
+    }
+    
+    void print_world(point map[][h]) {
+
+        unsigned int i, j;
+
+        for (i = 0; i < w; i++) {
+            for (j = 0; j < h; j++) {
+                if (map[i][j] == 1) {
+                    std::cout << "@";
+                }
+                else {
+                    std::cout << ".";
+                }
+                std::cout << " ";
+            }
+            std::cout << std::endl;
+        }
+    }
+
+
+
+}
